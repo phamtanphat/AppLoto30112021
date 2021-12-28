@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Integer> mArrNumbers;
     Random mRandom;
     String mStringHistory = "";
+    ScrollView mScrollView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,11 +84,15 @@ public class MainActivity extends AppCompatActivity {
                 if (mArrNumbers != null){
                     if (mArrNumbers.size() > 0 && mArrNumbers.size() < 100){
                         mArrNumbers.clear();
-                    }else{
+                    }else if (mArrNumbers.size() == 100){
                         return;
                     }
                 }
                 mArrNumbers = createArrNumbers();
+                mStringHistory = "";
+                mTvResult.setText("");
+                mTvHistory.setText(mStringHistory);
+
             }
         });
 
@@ -103,12 +109,27 @@ public class MainActivity extends AppCompatActivity {
             int index = mRandom.nextInt(mArrNumbers.size());
             int value = mArrNumbers.get(index);
             mStringHistory +=  value + " - ";
+            if (mArrNumbers.size() == 1){
+                mStringHistory = mStringHistory.substring(0 , mStringHistory.length() - 3);
+            }
             mTvResult.setText(value+"");
             mTvHistory.setText(mStringHistory);
             mArrNumbers.remove(index);
+
         }else{
             Toast.makeText(MainActivity.this, "Trò chơi kết thúc", Toast.LENGTH_SHORT).show();
         }
+
+        // Scroll tới vị trí mới
+//        View lastChild = mScrollView.getChildAt(mScrollView.getChildCount() - 1);
+//        int bottom = lastChild.getBottom() + mScrollView.getPaddingBottom();
+//        int sy = mScrollView.getScrollY();
+//        int sh = mScrollView.getHeight();
+//        int delta = bottom - (sy + sh);
+//
+//        mScrollView.smoothScrollBy(0, bottom);
+
+
     }
 
     private void initView() {
@@ -116,5 +137,6 @@ public class MainActivity extends AppCompatActivity {
         mTvResult = findViewById(R.id.textViewResult);
         mBtnRandom = findViewById(R.id.buttonRandom);
         mBtnReset = findViewById(R.id.buttonReset);
+        mScrollView = findViewById(R.id.scrollView);
     }
 }
