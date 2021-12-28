@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         initView();
         initData();
         event();
+
     }
 
     private void initData() {
@@ -71,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         mBtnReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Xử lý nếu 99 số thì reset mà 100 thì thoát không xử lý gì hết
                 if (mArrNumbers != null){
                     if (mArrNumbers.size() > 0 && mArrNumbers.size() < 100){
                         mArrNumbers.clear();
@@ -81,7 +84,25 @@ public class MainActivity extends AppCompatActivity {
                 mArrNumbers = createArrNumbers();
             }
         });
+
+        mBtnRandom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // random co số thực
+//                double value = Math.floor((Math.random() * 10 ) + 1);
+//                Log.d("BBB","Giá trị random " + value);
+                Random random = new Random();
+                int a = random.nextInt(5 - 3 + 1 ) + 3;
+
+                Log.d("BBB", "A " + a);
+
+            }
+        });
     }
+
+//    private void handleRandom(){
+//
+//    }
 
     private void initView() {
         mTvHistory = findViewById(R.id.textViewHistory);
