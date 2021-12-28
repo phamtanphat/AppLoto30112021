@@ -6,13 +6,13 @@
     android:layout_height="match_parent"
     android:background="#000000"
     tools:context=".MainActivity">
-    
+
     <ImageView
-        android:alpha="0.2"
-        android:layout_centerInParent="true"
-        android:src="@drawable/icon_2022"
         android:layout_width="match_parent"
-        android:layout_height="300dp"/>
+        android:layout_height="300dp"
+        android:layout_centerInParent="true"
+        android:alpha="0.2"
+        android:src="@drawable/icon_2022" />
 
     <LinearLayout
         android:orientation="vertical"
@@ -26,7 +26,7 @@
             android:textSize="40sp"
             android:textColor="#ffff"
             tools:text="71"
-            android:id="@+id/textViewNumberRandom"
+            android:id="@+id/textViewResult"
             android:layout_width="match_parent"
             android:layout_weight="2"
             android:layout_height="0dp"/>
@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"/>
             <Button
                 android:layout_marginStart="150dp"
-                android:id="@+id/buttonProgress"
+                android:id="@+id/buttonRandom"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textAllCaps="false"
@@ -68,7 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:id="@+id/textViewResult"
+                android:id="@+id/textViewHistory"
                 android:textSize="20sp"
                 android:textColor="#ffff"
                 tools:text="1 - 2 - 2 - 2 - 2 - 2 -2 - 2 - 2 - 2 - 2 - 2 - 2 - 2 - 2 - 2 - 2 - 2"
