@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,7 +18,8 @@ public class MainActivity extends AppCompatActivity {
     TextView mTvHistory, mTvResult;
     Button mBtnReset, mBtnRandom;
     ArrayList<Integer> mArrNumbers;
-
+    Random mRandom;
+    String mStringHistory = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +61,9 @@ public class MainActivity extends AppCompatActivity {
     private void initData() {
         // tạo 1 mảng 100 số từ 1 -> 100
         mArrNumbers = createArrNumbers();
+
+        // Khởi tạo random
+        mRandom = new Random();
     }
 
     private ArrayList<Integer> createArrNumbers() {
@@ -88,21 +93,23 @@ public class MainActivity extends AppCompatActivity {
         mBtnRandom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // random co số thực
-//                double value = Math.floor((Math.random() * 10 ) + 1);
-//                Log.d("BBB","Giá trị random " + value);
-                Random random = new Random();
-                int a = random.nextInt(5 - 3 + 1 ) + 3;
-
-                Log.d("BBB", "A " + a);
-
+                handleRandom();
             }
         });
     }
 
-//    private void handleRandom(){
-//
-//    }
+    private void handleRandom(){
+        if (mArrNumbers.size() > 0){
+            int index = mRandom.nextInt(mArrNumbers.size());
+            int value = mArrNumbers.get(index);
+            mStringHistory +=  value + " - ";
+            mTvResult.setText(value+"");
+            mTvHistory.setText(mStringHistory);
+            mArrNumbers.remove(index);
+        }else{
+            Toast.makeText(MainActivity.this, "Trò chơi kết thúc", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     private void initView() {
         mTvHistory = findViewById(R.id.textViewHistory);
